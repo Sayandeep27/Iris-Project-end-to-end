@@ -10,18 +10,13 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      PYTHONPATH: ./src   # ensures src is available for imports
+      PYTHONPATH: ./src
 
     services:
       mlflow:
-        image: ghcr.io/mlflow/mlflow
-        ports:
-          - 5000:5000
+        image: ghcr.io/mlflow/mlflow:2.9.1
         options: >-
-          --health-cmd="curl --fail http://127.0.0.1:5000/ || exit 1"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
+          --entrypoint "mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri sqlite:///mlflow.db --default-artifact-root ./mlruns"
 
     steps:
       - name: Checkout repository
@@ -36,15 +31,20 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pytest
+          pip install pytest scikit-learn pandas mlflow flask
 
       - name: Wait for MLflow server
         run: |
           echo "Waiting for MLflow to be ready..."
           for i in {1..30}; do
-            curl -s http://127.0.0.1:5000/ && break
+            curl -s http://mlflow:5000/ && break
             sleep 2
           done
 
+      - name: Run training script
+        run: |
+          python src/train.py
+
       - name: Run tests
-        run: pytest -v
+        run: |
+          pytest -v tests
