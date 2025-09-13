@@ -15,8 +15,14 @@ jobs:
     services:
       mlflow:
         image: ghcr.io/mlflow/mlflow:latest
+        ports:
+          - 5000:5000
+        command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri sqlite:///mlflow.db --default-artifact-root ./mlruns
         options: >-
-          --entrypoint "mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri sqlite:///mlflow.db --default-artifact-root ./mlruns"
+          --health-cmd="curl --fail http://127.0.0.1:5000/ || exit 1"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
 
     steps:
       - name: Checkout repository
@@ -32,9 +38,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pytest scikit-learn pandas mlflow flask
-
-      - name: Log in to GitHub Container Registry
-        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Wait for MLflow server
         run: |
