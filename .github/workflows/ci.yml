@@ -2,13 +2,15 @@ name: CI
 
 on:
   push:
-    branches: ["main"]     # Runs when you push to main
+    branches: ["main"]
   pull_request:
-    branches: ["main"]     # Runs on PRs to main
+    branches: ["main"]
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: ./src   # ensures src is available for imports
 
     steps:
       - name: Checkout repository
