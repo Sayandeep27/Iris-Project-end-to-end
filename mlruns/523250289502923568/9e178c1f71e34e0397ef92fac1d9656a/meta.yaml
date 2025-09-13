@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/523250289502923568/9e178c1f71e34e0397ef92fac1d9656a/artifacts
+end_time: 1757746730585
+entry_point_name: ''
+experiment_id: '523250289502923568'
+lifecycle_stage: active
+run_id: 9e178c1f71e34e0397ef92fac1d9656a
+run_name: flask_prediction
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1757746730182
+status: 3
+tags: []
+user_id: admin

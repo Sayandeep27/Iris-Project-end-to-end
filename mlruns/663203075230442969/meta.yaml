@@ -1,0 +1,6 @@
+artifact_location: file:///C:/Users/admin/Iris-Project-end-to-end/mlruns/663203075230442969
+creation_time: 1757745678852
+experiment_id: '663203075230442969'
+last_update_time: 1757745678852
+lifecycle_stage: active
+name: iris_rf_experiment

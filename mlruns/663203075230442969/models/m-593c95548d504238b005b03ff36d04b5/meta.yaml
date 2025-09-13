@@ -1,0 +1,10 @@
+artifact_location: file:///C:/Users/admin/Iris-Project-end-to-end/mlruns/663203075230442969/models/m-593c95548d504238b005b03ff36d04b5/artifacts
+creation_timestamp: 1757745679694
+experiment_id: '663203075230442969'
+last_updated_timestamp: 1757745689559
+model_id: m-593c95548d504238b005b03ff36d04b5
+model_type: null
+name: iris_model
+source_run_id: 09d6ed86b19a46808f113e1d29ff535c
+status: 2
+status_message: null

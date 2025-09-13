@@ -1,0 +1,6 @@
+artifact_location: mlflow-artifacts:/523250289502923568
+creation_time: 1757746693721
+experiment_id: '523250289502923568'
+last_update_time: 1757746693721
+lifecycle_stage: active
+name: flask_predictions
